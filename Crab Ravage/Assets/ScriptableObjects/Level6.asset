@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7c9af9903c1844c97dcf6e7b126a34, type: 3}
+  m_Name: Level6
+  m_EditorClassIdentifier: 
+  duration: 60
+  crabMoveSpeed: 3.75
+  slamTelegraphTime: 0.5
+  slamRecoveryDelay: 0.1
+  slamRecoverTime: 0.3
+  slamAttackDuration: 3
+  throwTelegraphTime1: 0.2
+  throwTelegraphTime2: 0.1
+  throwMinAmount: 4
+  throwMaxAmount: 6
+  laserXDuration: 0.2
+  laserXStartDelay: 0.3
+  laserXEndDelay: 1
+  laserFollowDuration: 7
+  laserFollowSpeed: 4
+  laserFollowStartDelay: 0.6
+  timeBetweenAttacks: 0.5
+  level: 5

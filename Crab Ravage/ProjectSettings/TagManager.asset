@@ -8,6 +8,7 @@ TagManager:
   - EnemyDeath
   - EnemyWeak
   - PlayerWeapon
+  - Music
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,15 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyDeath") && GameController.Instance.canTakeDamage)
+        {
+            GameController.Instance.canTakeDamage = false;
+            GameController.Instance.LoseLife();
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))

@@ -6,13 +6,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed, jumpSpeed;
-    public GameObject fireball;
-    public float fireballDelay, fireballSpeed;
+
+    public static PlayerMovement Instance { get; private set; }
 
     Rigidbody rb;
     PlayerCollision col;
-
-    bool shootingFireball = false;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -39,34 +41,32 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
-            transform.position += transform.forward * movementSpeed * Time.deltaTime;
+            Vector3 newPos = transform.position + transform.forward * movementSpeed * Time.deltaTime;
+            if(newPos.x >= -9.5 && newPos.x <= 9.5)
+            {
+                transform.position = newPos;
+            }
         }
+
+        if (Input.GetKeyUp(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.D) && Input.GetKey(KeyCode.A))
+        {
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && col.grounded)
         {
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartCoroutine(ShootFireball());
-        }
     }
 
-    IEnumerator ShootFireball()
+    public Vector3 GetLocationUnderPlayer()
     {
-        if (shootingFireball) { yield break; }
-        shootingFireball = true;
-        Fireball f = Instantiate(fireball,transform.position,Quaternion.identity).GetComponent<Fireball>();
-        
-        RaycastHit hit;
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, 1 << 8);
-
-        f.speed = fireballSpeed;
-        f.direction = (hit.point - f.transform.position).normalized;
-
-        yield return new WaitForSeconds(fireballDelay);
-
-        shootingFireball = false;
+        return new Vector3(transform.position.x, -4.08f, transform.position.z);
     }
 }
